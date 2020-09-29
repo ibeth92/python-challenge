@@ -20,7 +20,11 @@ print (csvpath)
     total_net = 0
 
     total_months = 0
+# Set Path for Text File
+    file_path = os.path.join("analysis","PyBank.txt")
 
+# Open Text File
+    f = open(file_path,'w', encoding="utf8")
 
 with open(csvpath) as csvfile:
 
@@ -33,11 +37,11 @@ with open(csvpath) as csvfile:
 
     for row in csvreader:
 
-    # Track total
+# Track total
         total_months += 1
         total_net = total_net + int(row[1])
 
-   # Track net change
+# Track net change
         list_a= [total_net,total_months]
         list_b= [net_change,]
         
@@ -49,14 +53,9 @@ with open(csvpath) as csvfile:
         net_change = int(row[1]) - previous_net
         avg = sum(net_changes)/len(net_changes)
 
-   # Calculate the greatest increase
-   # Calculate the greatest decrease
-   # Calculate the average net change
-  
-    
-  
-
-
+# Calculate the greatest increase
+# Calculate the greatest decrease
+# Calculate the average net change
 
     print(total_months)
     print(total_net)

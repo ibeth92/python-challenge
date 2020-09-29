@@ -4,37 +4,37 @@ import csv
 import os
 
 # Files to load and output
-csvpath = os.path.join('Resources', 'election_data.csv')
+dirname = os.path.dirname(__file__)
+
+csvpath = os.path.join(dirname,'Resources', 'election_data.csv')
 
 print (csvpath)
 
 # Create a dictionary to store totals
-
 candidate_data = {
-"Correy":0,
-"Khan":0,
-"Li":0,
-"O'Tooley":0
+    "Correy":0,
+    "Khan":0,
+    "Li":0,
+    "O'Tooley":0
 }
 
 # Read CSV using CSV module
-
 with open(csvpath) as csvfile:
 
-    # CSV reader specifies delimiter and variable that holds contents
+# CSV reader specifies delimiter and variable
     csvreader = csv.reader(csvfile, delimiter=',')
 
-    # Read the header row first 
+# Read the header row first 
     csv_header = next(csvreader)
 
-    # Set month counter and winner vote count
+# Set month counter and winner vote count
     total_votes = 0
     greatest_vote_total = 0
 
-# Set Path for Text File
+# Set path for .txt file
     file_path = os.path.join("analysis","PyPoll.txt")
 
-# Open Text File
+# Open .txt file
     f = open(file_path,'w', encoding="utf8")
 
 
@@ -44,18 +44,16 @@ with open(csvpath) as csvfile:
         candidate = str(row[2])
         candidate_data[candidate] = candidate_data[candidate] + 1
 
-# Sort Dictionary by Decending Vote Count
+# Sort dictionary by decending vote count
 desc_candidate_data = dict(sorted(candidate_data.items(), key=lambda x: (x[1]), reverse=True))
            
-# Print Report Header and Total Votes to Terminal
-
+# Print report header and total votes
 print("Election Results")
 print("-----------------------------------")
 print(f"Total Votes: {total_votes:,}")
 print("-----------------------------------")
 
-# Write Report Header and Total Votes to Text File
-
+# Write Report Header and Total Votes to text file
 f.write("Election Results")
 f.write("\n")
 f.write("-----------------------------------")
@@ -65,8 +63,7 @@ f.write("\n")
 f.write("-----------------------------------")
 f.write("\n")
 
-# Print Election Results to Terminal and Write Election Results to Text File
-
+# Print election results  and write election results to .txt file
 for x in desc_candidate_data:
     name = str(x)
     votes = int(desc_candidate_data[x])
@@ -82,8 +79,7 @@ print("-----------------------------------")
 f.write("-----------------------------------")
 
 
-# Print Winner to Terminal and Write Winner to Text File 
-
+# Print winner and write to .txt file 
 print(f"Winner: {winner}")
 print("-----------------------------------")
 f.write("\n")
@@ -91,6 +87,5 @@ f.write(f"Winner: {winner}")
 f.write("\n")
 f.write("-----------------------------------")
 
- # Close Text File
-
+ # Close .txt file
 f.close()
